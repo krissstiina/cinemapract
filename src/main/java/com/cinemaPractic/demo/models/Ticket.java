@@ -2,6 +2,7 @@ package com.cinemaPractic.demo.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 public class Ticket {
@@ -27,7 +28,7 @@ public class Ticket {
     }
 
     @OneToOne(fetch = FetchType.EAGER)
-    @Column(name = "session_id")
+    @JoinColumn(name = "session_id")
     public Session getSession() {
         return session;
     }
@@ -37,7 +38,7 @@ public class Ticket {
     }
 
     @OneToOne(fetch = FetchType.EAGER)
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName= "id")
     public User getUser() {
         return user;
     }
