@@ -5,19 +5,22 @@ import java.sql.Time;
 import javax.xml.crypto.Data;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "session")
 public class Session extends BaseEntity {
     private Data data;
     private Time time;
     private Hall hall;
     private Film film;
 
-    protected Session(){
-    }
+    protected Session(){}
 
     public Session(Data data, Time time, Hall  hall, Film film){
         this.data = data;

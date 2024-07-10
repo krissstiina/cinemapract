@@ -1,16 +1,19 @@
 package com.cinemaPractic.demo.models;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "hall")
 public class Hall extends BaseEntity {
     private int capacity;
     private Cinema cinema;
 
-    protected Hall(){
-    }
+    protected Hall(){}
 
     public Hall(int capacity, Cinema cinema){
         this.capacity = capacity;

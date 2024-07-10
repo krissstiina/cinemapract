@@ -1,7 +1,11 @@
 package com.cinemaPractic.demo.models;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "user")
 public class User  extends BaseEntity{
     private String name;
     private String surname;

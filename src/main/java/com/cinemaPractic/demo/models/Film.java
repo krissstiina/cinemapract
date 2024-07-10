@@ -1,15 +1,18 @@
 package com.cinemaPractic.demo.models;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "film")
 public class Film extends BaseEntity {
     private String name;
     private String genre;
     private String producer;
     private int yearOfPublish;
 
-    protected Film(){
-    }
+    protected Film(){}
 
     public Film(String name, String genre, String producer, int yearOfPublish){
         this.name = name;
