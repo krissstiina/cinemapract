@@ -1,4 +1,4 @@
-package com.cinemaPractic.demo.models;
+package com.cinemaPractic.demo.entites;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

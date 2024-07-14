@@ -1,4 +1,4 @@
-package com.cinemaPractic.demo.models;
+package com.cinemaPractic.demo.entites;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,15 +12,17 @@ public class User  extends BaseEntity{
     private String middleName;
     private int numberOfVisit;
     private int phoneNumber;
+    private int points = 0;
 
     protected User(){}
 
-    public User(String name, String surname, String middleName, int numberOfVisit, int phoneNumber){
+    public User(String name, String surname, String middleName, int numberOfVisit, int phoneNumber, int points){
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
         this.numberOfVisit = numberOfVisit;
         this.phoneNumber = phoneNumber;
+        this.points = points;
     }
 
     @Column(name = "name")
@@ -66,6 +68,15 @@ public class User  extends BaseEntity{
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Column(name = "points")
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.cinemaPractic.demo.models;
+package com.cinemaPractic.demo.entites;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,4 +13,9 @@ public abstract  class BaseEntity {
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 }
