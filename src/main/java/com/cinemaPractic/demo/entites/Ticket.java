@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "ticket")
-public class Ticket {
+public class Ticket extends BaseEntity{
     private int price;
     private Session session;
     private User user;
@@ -42,7 +42,7 @@ public class Ticket {
     }
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id", referencedColumnName= "id")
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }

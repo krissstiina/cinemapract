@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.cinemaPractic.demo.entites.User;
 import com.cinemaPractic.demo.repositories.UserRepository;
@@ -12,13 +13,18 @@ import com.cinemaPractic.demo.repositories.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-
+@Repository
 public class UserRepositoryDao implements UserRepository{
     @Autowired
     private BaseUserRepo baseUserRepo;
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Override
+    public void create(User user) {
+        entityManager.persist(user);
+    }
 
     @Override
     public Integer findPointsByUserId(int id) {
@@ -50,17 +56,17 @@ public class UserRepositoryDao implements UserRepository{
 
 interface BaseUserRepo extends JpaRepository<User, Integer> {
 
-    @Query(value = "SELECT u.points FROM User u WHERE u.id = :userId")
+    @Query(value = "SELECT u.points FROM User u WHERE u.id = :id")
     Integer findPointsByUserId(@Param(value = "id") int id);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE User u SET u.points = u.points + 1 WHERE u.id = :userId")
+    @Query(value = "UPDATE User u SET u.points = u.points + 1 WHERE u.id = :id")
     int addPoint(@Param(value = "id") int id);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE User u SET u.points = u.points - :points WHERE u.id = :userId AND u.points >= :points")
+    @Query(value = "UPDATE User u SET u.points = u.points - :points WHERE u.id = :id AND u.points >= :points")
     int deductPoints(@Param(value = "id") int id, @Param(value = "points") Integer points);
 }
 

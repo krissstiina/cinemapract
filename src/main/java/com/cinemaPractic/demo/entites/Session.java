@@ -1,8 +1,6 @@
 package com.cinemaPractic.demo.entites;
 
-import java.sql.Time;
-
-import javax.xml.crypto.Data;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,38 +12,27 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "session")
 public class Session extends BaseEntity {
-    private Data data;
-    private Time time;
+    private Date date;
     private Hall hall;
     private Film film;
     private int availableSeats;
 
     protected Session(){}
 
-    public Session(Data data, Time time, Hall  hall, Film film, int availableSeats){
-        this.data = data;
-        this.time = time;
+    public Session(Date date, Hall  hall, Film film, int availableSeats){
+        this.date = date;
         this.hall = hall;
         this.film = film;
         this.availableSeats = availableSeats;
     }
 
-    @Column(name = "data")
-    public Data getData() {
-        return data;
+    @Column(name = "date")
+    public Date getDate() {
+        return date;
     }
 
-    public void setData(Data data) {
-        this.data = data;
-    }
-
-    @Column(name = "time")
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

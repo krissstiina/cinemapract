@@ -11,16 +11,16 @@ public class Film extends BaseEntity {
     private String genre;
     private String producer;
     private int yearOfPublish;
-    private int viewCount;
+    private int rating;
 
     protected Film(){}
 
-    public Film(String name, String genre, String producer, int yearOfPublish, int viewCount){
+    public Film(String name, String genre, String producer, int yearOfPublish, int rating){
         this.name = name;
         this.genre = genre;
         this.producer = producer;
         this.yearOfPublish = yearOfPublish;
-        this.viewCount = viewCount;
+        this.rating = rating;
     }
 
     @Column(name = "name")
@@ -59,13 +59,13 @@ public class Film extends BaseEntity {
         this.yearOfPublish = yearOfPublish;
     }
 
-    @Column(name = "viewCount")
-    public int getViewCount() {
-        return viewCount;
+    @Column(name = "rating")
+    public int getRating() {
+        return rating;
     }
 
-    public void setViewCount(int viewCount) {
-        this.viewCount = viewCount;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
 }
