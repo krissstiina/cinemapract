@@ -19,12 +19,16 @@ import com.cinemaPractic.demo.service.CinemaService;
 public class CinemaServiceImpl extends CinemaNotFoundException implements CinemaService {
     @Autowired
     private CinemaRepository cinemaRepository;
-    ModelMapper modelMapper = new ModelMapper();
+    
+    private ModelMapper modelMapper;
+    public CinemaServiceImpl(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public CinemaDTO create(CreateCinemaDTO cinemaDTO) {
         Cinema cinema = modelMapper.map(cinemaDTO,Cinema.class);
-        cinemaRepository.createCinema(cinema);
+        cinemaRepository.create(cinema);
         return modelMapper.map(cinema, CinemaDTO.class);
     }
 

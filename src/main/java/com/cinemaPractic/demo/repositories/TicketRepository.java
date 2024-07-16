@@ -3,8 +3,11 @@ package com.cinemaPractic.demo.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.cinemaPractic.demo.entites.Ticket;
 
+@Repository
 public interface TicketRepository {
 
     Ticket create(Ticket ticket);
@@ -12,6 +15,5 @@ public interface TicketRepository {
     Ticket update(Ticket ticket);
     Optional<Ticket> findById(int id);
     List<Ticket> findAll();
-    Ticket findTicketByUserAndSession(int userId, int sessionId);
-
+    // List<Ticket> findTicketsByUser(int userId);
 }

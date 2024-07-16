@@ -25,9 +25,8 @@ public class CinemaRepositoryDao implements CinemaRepository {
 
     @Transactional
     @Override
-    public Cinema createCinema(Cinema cinema) {
-        entityManager.persist(cinema);
-        return cinema;
+    public Cinema create(Cinema cinema) {
+        return baseCinemaRepo.save(cinema);
     }
 
     @Transactional
@@ -39,8 +38,7 @@ public class CinemaRepositoryDao implements CinemaRepository {
     @Transactional
     @Override
     public Cinema update(Cinema cinema){
-        entityManager.persist(cinema);
-        return cinema;
+        return baseCinemaRepo.save(cinema);
     }
 
     @Override

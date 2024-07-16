@@ -28,8 +28,7 @@ public class FilmRepositoryDao implements FilmRepository  {
     @Transactional
     @Override
     public Film create(Film film) {
-        entityManager.persist(film);
-        return film;
+        return baseFilmRepo.save(film);
     }
 
     @Transactional
@@ -41,8 +40,7 @@ public class FilmRepositoryDao implements FilmRepository  {
     @Transactional
     @Override
     public Film update(Film film){
-        entityManager.persist(film);
-        return film;
+        return baseFilmRepo.save(film);
     }
 
     @Override
@@ -74,8 +72,6 @@ interface BaseFilmRepo extends JpaRepository<Film, Integer> {
         @Param("genres") List<String> genres,
         @Param("amount") int amount
     );
-//TODO: поправить запрос
-    @Query("SELECT DISTINCT f FROM Film f JOIN f.session s JOIN s.ticket t WHERE t.user.id = :userId")
-    List<Film> findAllByUserId(@Param("userId") int userId);
+        @Query(value = "SELECT f FROM Film AS f JOIN Session AS s ON s.film = f JOIN Ticket AS t ON t.session = s JOIN t.user AS u WHERE u.id = :userId")
+    List<Film> findAllByUserId(@Param("userId") Integer userId);
 }
-

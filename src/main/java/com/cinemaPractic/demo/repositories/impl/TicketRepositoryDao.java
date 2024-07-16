@@ -28,8 +28,7 @@ public class TicketRepositoryDao implements TicketRepository {
     @Transactional
     @Override
     public Ticket create(Ticket ticket) {
-        entityManager.persist(ticket);
-        return ticket;
+        return baseTicketRepo.save(ticket);
     }
 
     @Transactional
@@ -41,8 +40,7 @@ public class TicketRepositoryDao implements TicketRepository {
     @Transactional
     @Override
     public Ticket update(Ticket ticket){
-        entityManager.persist(ticket);
-        return ticket;
+        return baseTicketRepo.save(ticket);
     }
 
     @Override
@@ -55,17 +53,14 @@ public class TicketRepositoryDao implements TicketRepository {
         return baseTicketRepo.findById(id);
     }
 
-    @Override
-    public Ticket findTicketByUserAndSession(int userId, int sessionId) {
-        return baseTicketRepo.findTicketByUserAndSession(userId, sessionId);
-    }
+    // @Override
+    // public List<Ticket> findTicketsByUser(int userId) {
+    //     return baseTicketRepo.findTicketsByUser(userId);
+    // }
 
 }
 interface BaseTicketRepo extends JpaRepository<Ticket, Integer> {
 
-    @Query("SELECT t FROM Ticket t WHERE t.user.id = :userId AND t.session.id = :sessionId")
-    Ticket findTicketByUserAndSession(
-        @Param("userId") int userId,
-        @Param("sessionId") int sessionId);
-
+    // @Query("SELECT t FROM Ticket t WHERE t.user.id = :userId")
+    // List<Ticket> findTicketsByUser(@Param("userId") int userId);
 }

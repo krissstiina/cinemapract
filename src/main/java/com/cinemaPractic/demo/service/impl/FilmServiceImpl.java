@@ -24,13 +24,16 @@ public class FilmServiceImpl implements FilmService {
 
     @Autowired
     private FilmRepository filmRepository;
-    ModelMapper modelMapper = new ModelMapper();
+    
+    private ModelMapper modelMapper;
+    public FilmServiceImpl(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public FilmDTO create(CreateFilmDTO filmDTO) {
-        Film film = modelMapper.map(filmDTO,Film.class);
-        filmRepository.create(film);
-        return modelMapper.map(film, FilmDTO.class);
+        Film film = modelMapper.map(filmDTO, Film.class);
+        return modelMapper.map(filmRepository.create(film), FilmDTO.class);
     }
 
     @Override
@@ -101,4 +104,5 @@ public class FilmServiceImpl implements FilmService {
 
         return recommendedFilms;
     }
+    
 }

@@ -5,20 +5,24 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cinemaPractic.demo.entites.User;
-import com.cinemaPractic.demo.exception.HallNotFoundException;
 import com.cinemaPractic.demo.exception.UserNotFoundException;
 import com.cinemaPractic.demo.model.CreateUserDTO;
 import com.cinemaPractic.demo.model.UpdateUserDTO;
 import com.cinemaPractic.demo.model.UserDTO;
 import com.cinemaPractic.demo.repositories.UserRepository;
 import com.cinemaPractic.demo.service.UserService;
-
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    ModelMapper modelMapper = new ModelMapper();
+    
+    private ModelMapper modelMapper;
+    public UserServiceImpl(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
+    }
 
     @Override
     public UserDTO create(CreateUserDTO userDTO) {

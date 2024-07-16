@@ -38,7 +38,6 @@ public class Hall extends BaseEntity {
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
-
 }
 
 

@@ -11,11 +11,11 @@ public class Film extends BaseEntity {
     private String genre;
     private String producer;
     private int yearOfPublish;
-    private int rating;
+    private double rating;
 
     protected Film(){}
 
-    public Film(String name, String genre, String producer, int yearOfPublish, int rating){
+    public Film(String name, String genre, String producer, int yearOfPublish, double rating){
         this.name = name;
         this.genre = genre;
         this.producer = producer;
@@ -60,11 +60,11 @@ public class Film extends BaseEntity {
     }
 
     @Column(name = "rating")
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

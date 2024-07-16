@@ -24,8 +24,7 @@ public class UserRepositoryDao implements UserRepository{
     @Transactional
     @Override
     public User create(User user) {
-        entityManager.persist(user);
-        return user;
+        return baseUserRepo.save(user);
     }
 
     @Transactional
@@ -37,8 +36,7 @@ public class UserRepositoryDao implements UserRepository{
     @Transactional
     @Override
     public User update(User user){
-        entityManager.persist(user);
-        return user;
+        return baseUserRepo.save(user);
     }
 
     @Override
@@ -49,6 +47,12 @@ public class UserRepositoryDao implements UserRepository{
     @Override
     public Optional<User> findById(int id){
         return baseUserRepo.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public void save(User user) {
+        entityManager.persist(user);
     }
     
 }

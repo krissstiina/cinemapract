@@ -3,15 +3,16 @@ package com.cinemaPractic.demo.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.cinemaPractic.demo.entites.User;
 
+@Repository
 public interface UserRepository {
     User create(User user);
     void delete(int id);
     User update(User user);
     List<User> findAll();
     Optional<User> findById(int id);
-//     Integer findPointsByUserId(int id);
-//     int addPoint(int id);
-//     int deductPoints(int id, int points);
+    void save(User user);
 }

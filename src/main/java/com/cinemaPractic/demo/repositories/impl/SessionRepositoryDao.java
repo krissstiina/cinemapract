@@ -28,8 +28,7 @@ public class SessionRepositoryDao implements SessionRepository {
     @Transactional
     @Override
     public Session create(Session session) {
-        entityManager.persist(session);
-        return session;
+        return baseSessionRepo.save(session);
     }
 
     @Transactional
@@ -41,8 +40,7 @@ public class SessionRepositoryDao implements SessionRepository {
     @Transactional
     @Override
     public Session update(Session session){
-        entityManager.persist(session);
-        return session;
+        return baseSessionRepo.save(session);
     }
 
     @Override

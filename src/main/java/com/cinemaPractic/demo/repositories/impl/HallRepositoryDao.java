@@ -25,8 +25,7 @@ public class HallRepositoryDao implements HallRepository {
     @Transactional
     @Override
     public Hall create(Hall hall) {
-        entityManager.persist(hall);
-        return hall;
+        return baseHallRepo.save(hall);
     }
 
     @Transactional
@@ -38,8 +37,7 @@ public class HallRepositoryDao implements HallRepository {
     @Transactional
     @Override
     public Hall update(Hall hall){
-        entityManager.persist(hall);
-        return hall;
+        return baseHallRepo.save(hall);
     }
 
     @Override
