@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,12 +48,9 @@ public class FilmController {
         return filmService.update(updateFilmDTO);
     }
 
-    // @GetMapping("/user/{userId}/recommendations")
-    // public List<Film> getFilmRecommendations(@PathVariable int userId) {
-    //     User user = new User();
-    //     user.setId(userId);
-    //     List<Film> recommendedFilms = filmService.getRecommendations(user);
-    //     return recommendedFilms;
-    // }
-    
+    @GetMapping("/{userId}/recomendation")
+    public ResponseEntity<List<FilmDTO>> getRecommendations(@PathVariable int userId) {
+        List<FilmDTO> recommendations = filmService.getRecommendations(userId);
+        return ResponseEntity.ok(recommendations);
+    }
 }

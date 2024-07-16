@@ -61,6 +61,8 @@ public class ConsoleRunner implements CommandLineRunner {
 
         CreateUserDTO user1 = new CreateUserDTO("Кристина", "Зубрицкая", "Константиновна", "89042763542", 0);
         userService.create(user1);
+        CreateUserDTO user2 = new CreateUserDTO("Елизавета", "Васильева", "Константиновна", "89042674565", 0);
+        userService.create(user1);
 
         User user = new User(user1.getName(), user1.getSurname(), user1.getMiddleName(), user1.getPhoneNumber(), user1.getPoints());
 
@@ -79,7 +81,7 @@ public class ConsoleRunner implements CommandLineRunner {
         ticketService.create(ticket);
 
         //Рекомендации фильмов
-        System.out.println(filmService.getRecommendations(user));
+        System.out.println(filmService.getRecommendations(1));
 
         //Бронирование места
         System.out.println(sessionService.bookSeat(1));

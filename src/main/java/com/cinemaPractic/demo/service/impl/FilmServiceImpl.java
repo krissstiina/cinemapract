@@ -64,14 +64,10 @@ public class FilmServiceImpl implements FilmService {
     public List<FilmDTO> findAll() {
         return filmRepository.findAll().stream().map((film) -> modelMapper.map(film,FilmDTO.class)).toList();
     }
-    @Override
-    public List<Film> findAllByUserId(int id) {
-        return filmRepository.findAllByUserId(id);
-    }
 
     @Override
-    public List<Film> getRecommendations(User user) {
-        List<Film> films = filmRepository.findAllByUserId(user.getId());
+    public List<FilmDTO> getRecommendations(int userId) {
+        List<Film> films = filmRepository.findAllByUserId(userId);
         
         Map<String, Integer> genreRepetitions = new HashMap<>();
 
@@ -102,7 +98,7 @@ public class FilmServiceImpl implements FilmService {
         int recommendedFilmsCount = 5;
         List<Film> recommendedFilms = filmRepository.findAllFilmsSortedByRating(mostPopularGenres, recommendedFilmsCount);
 
-        return recommendedFilms;
+        return recommendedFilms.stream().map((film) -> modelMapper.map(film, FilmDTO.class)).toList();
     }
     
 }
