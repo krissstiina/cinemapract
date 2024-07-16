@@ -29,8 +29,8 @@ public class CinemaServiceImpl extends CinemaNotFoundException implements Cinema
     }
 
     @Override
-    public void deleteCinema(int id) {
-        cinemaRepository.deleteCinema(id);
+    public void delete(int id) {
+        cinemaRepository.delete(id);
     }
 
     @Override

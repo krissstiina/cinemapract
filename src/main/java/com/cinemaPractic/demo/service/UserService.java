@@ -1,13 +1,16 @@
 package com.cinemaPractic.demo.service;
 
-import com.cinemaPractic.demo.entites.User;
+import java.util.Optional;
+import java.util.List;
+
+import com.cinemaPractic.demo.model.CreateUserDTO;
+import com.cinemaPractic.demo.model.UpdateUserDTO;
+import com.cinemaPractic.demo.model.UserDTO;
 
 public interface UserService {
-    Integer getPoints(int id);
-    void addPoint(int id);
-    boolean redeemPoints(int id, Integer points);
-    Integer calculateRedeemAmount(Integer points);
-    User findUserById(int id);
-    void deleteUser(int id);
-    void create(User user);
+    UserDTO create(CreateUserDTO userDTO);
+    public void delete(int id);
+    public Optional<UserDTO> findById(int id);
+    public List<UserDTO> findAll();
+    UserDTO update(UpdateUserDTO userDTO);
 }

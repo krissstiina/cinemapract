@@ -14,7 +14,7 @@ public class User  extends BaseEntity{
     private int phoneNumber;
     private int points = 0;
 
-    protected User(){}
+    public User(){}
 
     public User(String name, String surname, String middleName, int numberOfVisit, int phoneNumber, int points){
         this.name = name;

@@ -1,6 +1,6 @@
 package com.cinemaPractic.demo.model;
 
-public class UserDTO {
+public class UpdateUserDTO {
     public int id;
     public String name;
     public String surname;

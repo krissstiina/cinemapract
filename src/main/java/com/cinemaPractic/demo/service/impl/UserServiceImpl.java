@@ -1,51 +1,58 @@
 package com.cinemaPractic.demo.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cinemaPractic.demo.entites.User;
+import com.cinemaPractic.demo.exception.HallNotFoundException;
+import com.cinemaPractic.demo.exception.UserNotFoundException;
+import com.cinemaPractic.demo.model.CreateUserDTO;
+import com.cinemaPractic.demo.model.UpdateUserDTO;
+import com.cinemaPractic.demo.model.UserDTO;
 import com.cinemaPractic.demo.repositories.UserRepository;
 import com.cinemaPractic.demo.service.UserService;
 
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public User findUserById(int id) {
-        return userRepository.findUserById(id);
-    }
-
-    @Transactional
-    @Override
-    public void create(User user) {
+    public UserDTO create(CreateUserDTO userDTO) {
+        User user = modelMapper.map(userDTO,User.class);
         userRepository.create(user);
+        return modelMapper.map(user, UserDTO.class);
     }
 
     @Override
-    public void deleteUser(int id) {
-        userRepository.deleteUser(id);
+    public void delete(int id) {
+        userRepository.delete(id);
     }
 
     @Override
-    public void addPoint(int id) {
-        userRepository.addPoint(id);
+    public Optional<UserDTO> findById(int id){
+        Optional<User> user = userRepository.findById(id);
+        if (!user.isPresent()){
+            throw new UserNotFoundException();
+        }
+        return Optional.of(modelMapper.map(user,UserDTO.class));
     }
 
     @Override
-    public Integer getPoints(int id) {
-        return userRepository.findPointsByUserId(id);
+    public UserDTO update(UpdateUserDTO userDTO) {
+        Optional <User> user = userRepository.findById(userDTO.id);
+        if (!user.isPresent()){
+            throw new UserNotFoundException();
+        }
+        userRepository.update(user.get());
+        return modelMapper.map(user,UserDTO.class);
     }
 
     @Override
-    public boolean redeemPoints(int id, Integer points) {
-        int updatedPoints = userRepository.deductPoints(id, points);
-        return updatedPoints > 0;
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream().map((user) -> modelMapper.map(user,UserDTO.class)).toList();
     }
-
-    @Override
-    public Integer calculateRedeemAmount(Integer points) {
-        return points * 10; // 1 балл = 10 рублей
-    }
-
 }

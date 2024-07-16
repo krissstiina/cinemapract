@@ -1,15 +1,21 @@
 package com.cinemaPractic.demo.service.impl;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cinemaPractic.demo.entites.Film;
 import com.cinemaPractic.demo.entites.User;
+import com.cinemaPractic.demo.exception.FilmNotFoundException;
+import com.cinemaPractic.demo.model.CreateFilmDTO;
+import com.cinemaPractic.demo.model.FilmDTO;
+import com.cinemaPractic.demo.model.UpdateFilmDTO;
 import com.cinemaPractic.demo.repositories.FilmRepository;
 import com.cinemaPractic.demo.service.FilmService;
 
@@ -18,22 +24,49 @@ public class FilmServiceImpl implements FilmService {
 
     @Autowired
     private FilmRepository filmRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public void createFilm(Film film) {
+    public FilmDTO create(CreateFilmDTO filmDTO) {
+        Film film = modelMapper.map(filmDTO,Film.class);
         filmRepository.create(film);
+        return modelMapper.map(film, FilmDTO.class);
     }
 
     @Override
-    public void deleteFilm(int id) {
-        filmRepository.deleteFilm(id);
+    public Optional<FilmDTO> findById(int id){
+        Optional<Film> film = filmRepository.findById(id);
+        if (!film.isPresent()){
+            throw new FilmNotFoundException();
+        }
+        return Optional.of(modelMapper.map(film,FilmDTO.class));
     }
 
     @Override
-    public Film findFilmById(int id) {
-        return filmRepository.findFilmById(id);
+    public void delete(int id) {
+        filmRepository.delete(id);
     }
 
+    @Override
+    public FilmDTO update(UpdateFilmDTO filmDTO) {
+        Optional <Film> film = filmRepository.findById(filmDTO.id);
+        if (!film.isPresent()){
+            throw new FilmNotFoundException();
+        }
+        filmRepository.update(film.get());
+        return modelMapper.map(film,FilmDTO.class);
+    }
+
+    @Override
+    public List<FilmDTO> findAll() {
+        return filmRepository.findAll().stream().map((film) -> modelMapper.map(film,FilmDTO.class)).toList();
+    }
+    @Override
+    public List<Film> findAllByUserId(int id) {
+        return filmRepository.findAllByUserId(id);
+    }
+
+    @Override
     public List<Film> getRecommendations(User user) {
         List<Film> films = filmRepository.findAllByUserId(user.getId());
         

@@ -1,6 +1,7 @@
 package com.cinemaPractic.demo.model;
 
-public class CreateFilmDTO {
+public class UpdateFilmDTO {
+    public int id;
     public String name;
     public String genre;
     public String producer;

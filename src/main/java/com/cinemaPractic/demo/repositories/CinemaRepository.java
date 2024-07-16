@@ -10,7 +10,7 @@ import com.cinemaPractic.demo.entites.Cinema;
 public interface CinemaRepository {
 
     Cinema createCinema(Cinema cinema);
-    void deleteCinema(int id);
+    void delete(int id);
     Cinema update(Cinema cinema);
     List<Cinema> findAll();
     Optional<Cinema> findById(int id);

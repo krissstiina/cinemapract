@@ -32,7 +32,7 @@ public class CinemaRepositoryDao implements CinemaRepository {
 
     @Transactional
     @Override
-    public void deleteCinema(int id) {
+    public void delete(int id) {
         entityManager.remove(entityManager.find(Cinema.class, id));
     }
 

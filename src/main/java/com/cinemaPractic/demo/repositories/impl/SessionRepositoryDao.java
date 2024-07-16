@@ -1,6 +1,7 @@
 package com.cinemaPractic.demo.repositories.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,23 +25,47 @@ public class SessionRepositoryDao implements SessionRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
+    @Override
+    public Session create(Session session) {
+        entityManager.persist(session);
+        return session;
+    }
 
     @Transactional
     @Override
-    public void createSession(Session session) {
-        entityManager.persist(session);
+    public void delete(int id) {
+        entityManager.remove(entityManager.find(Session.class, id));
     }
 
+    @Transactional
+    @Override
+    public Session update(Session session){
+        entityManager.persist(session);
+        return session;
+    }
+
+    @Override
+    public List<Session> findAll() {
+        return baseSessionRepo.findAll();
+    }
+
+    @Override
+    public Optional<Session> findById(int id){
+        return baseSessionRepo.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public void save(Session session) {
+        entityManager.persist(session);
+    }
 
     @Override
     public Session findSessionWithAvailableSeats(int id) {
         return baseSessionRepo.findSessionWithAvailableSeats(id);
     }
 
-    @Override
-    public int bookSeat(int id) {
-        return baseSessionRepo.bookSeat(id);
-    }
 
     @Override
     public List<Session> findSessionsWithAvailableSeatsForFilm(int id) {
@@ -50,12 +75,10 @@ public class SessionRepositoryDao implements SessionRepository {
 
 interface BaseSessionRepo extends JpaRepository<Session, Integer> {
 
-    @Query(value = "SELECT s FROM Session s WHERE s.id = :sessionId AND s.availableSeats > 0")
+    @Query(value = "SELECT s FROM Session s WHERE s.id = :sessionId")
     Session findSessionWithAvailableSeats(@Param(value = "sessionId") int id);
 
-    @Query(value = "SELECT s FROM Session s WHERE s.film.id = :id AND s.availableSeats > 0")
+    @Query(value = "SELECT s FROM Session s WHERE s.film.id = :id")
     List<Session> findSessionsWithAvailableSeatsForFilm(@Param(value = "id") int FilmId);
 
-    @Query(value = "UPDATE Session s SET s.availableSeats = s.availableSeats - 1 WHERE s.id = :id AND s.availableSeats > 0")
-    int bookSeat(@Param(value = "id") int id);
 }

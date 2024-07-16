@@ -17,8 +17,6 @@ import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.service.CinemaService;
 
-
-
 @RestController
 @RequestMapping("/api/cinema")
 public class CinemaController {
@@ -45,8 +43,5 @@ public class CinemaController {
     public CinemaDTO update(@RequestBody UpdateCinemaDTO updateCinemaDTO){
         return cinemaService.update(updateCinemaDTO);
     }
-    
-    
-    
-    
+
 }

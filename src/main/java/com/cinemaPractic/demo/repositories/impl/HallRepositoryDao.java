@@ -1,5 +1,10 @@
 package com.cinemaPractic.demo.repositories.impl;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,18 +16,43 @@ import jakarta.persistence.PersistenceContext;
 @Repository
 public class HallRepositoryDao implements HallRepository {
     
+    @Autowired
+    private BaseHallRepo baseHallRepo;
+
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
     @Override
-    public void deleteHall(int id) {
+    public Hall create(Hall hall) {
+        entityManager.persist(hall);
+        return hall;
+    }
+
+    @Transactional
+    @Override
+    public void delete(int id) {
         entityManager.remove(entityManager.find(Hall.class, id));
     }
 
     @Transactional
     @Override
-    public void createHall(Hall hall) {
+    public Hall update(Hall hall){
         entityManager.persist(hall);
+        return hall;
     }
+
+    @Override
+    public List<Hall> findAll() {
+        return baseHallRepo.findAll();
+    }
+
+    @Override
+    public Optional<Hall> findById(int id){
+        return baseHallRepo.findById(id);
+    }
+
 }
+
+interface BaseHallRepo extends JpaRepository<Hall, Integer> {}
+

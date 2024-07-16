@@ -1,7 +1,6 @@
 package com.cinemaPractic.demo.model;
 
-public class UserDTO {
-    public int id;
+public class CreateUserDTO {
     public String name;
     public String surname;
     public String middleName;

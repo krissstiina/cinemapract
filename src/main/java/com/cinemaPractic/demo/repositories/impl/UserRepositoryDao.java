@@ -1,10 +1,10 @@
 package com.cinemaPractic.demo.repositories.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.cinemaPractic.demo.entites.User;
@@ -21,52 +21,39 @@ public class UserRepositoryDao implements UserRepository{
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     @Override
-    public void create(User user) {
+    public User create(User user) {
         entityManager.persist(user);
-    }
-
-    @Override
-    public Integer findPointsByUserId(int id) {
-        return baseUserRepo.findPointsByUserId(id);
-    }
-
-    @Override
-    public int addPoint(int id) {
-        return baseUserRepo.addPoint(id);
-    }
-
-    @Override
-    public int deductPoints(int id, int points) {
-        return baseUserRepo.deductPoints(id, points);
-    }
-
-    @Override
-    public User findUserById(int id) {
-        return entityManager.find(User.class, id);
+        return user;
     }
 
     @Transactional
     @Override
-    public void deleteUser(int id) {
+    public void delete(int id) {
         entityManager.remove(entityManager.find(User.class, id));
     }
 
+    @Transactional
+    @Override
+    public User update(User user){
+        entityManager.persist(user);
+        return user;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return baseUserRepo.findAll();
+    }
+
+    @Override
+    public Optional<User> findById(int id){
+        return baseUserRepo.findById(id);
+    }
+    
 }
 
 interface BaseUserRepo extends JpaRepository<User, Integer> {
 
-    @Query(value = "SELECT u.points FROM User u WHERE u.id = :id")
-    Integer findPointsByUserId(@Param(value = "id") int id);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE User u SET u.points = u.points + 1 WHERE u.id = :id")
-    int addPoint(@Param(value = "id") int id);
-
-    @Modifying
-    @Transactional
-    @Query(value = "UPDATE User u SET u.points = u.points - :points WHERE u.id = :id AND u.points >= :points")
-    int deductPoints(@Param(value = "id") int id, @Param(value = "points") Integer points);
 }
 
