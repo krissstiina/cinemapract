@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cinemaPractic.demo.entites.Film;
+import com.cinemaPractic.demo.entites.User;
 import com.cinemaPractic.demo.model.CreateFilmDTO;
 import com.cinemaPractic.demo.model.FilmDTO;
 import com.cinemaPractic.demo.model.UpdateFilmDTO;

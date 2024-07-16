@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cinemaPractic.demo.entites.Session;
 import com.cinemaPractic.demo.model.CreateSessionDTO;
 import com.cinemaPractic.demo.model.SessionDTO;
 import com.cinemaPractic.demo.model.UpdateSessionDTO;
@@ -47,14 +46,14 @@ public class SessionController {
         return sessionService.update(updateSessionDTO);
     }
     
-    @PostMapping("/{sessionId}/book")
-    public ResponseEntity<Session> bookSeat(@PathVariable("sessionId") int sessionId) {
-        Session bookedSession = sessionService.bookSeat(sessionId);
-
+    @GetMapping("/{sessionId}/book")
+    public ResponseEntity<SessionDTO> bookSeat(@PathVariable int sessionId) {
+        SessionDTO bookedSession = sessionService.bookSeat(sessionId);
         if (bookedSession != null) {
             return ResponseEntity.ok(bookedSession);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
 }

@@ -10,7 +10,7 @@ import com.cinemaPractic.demo.model.UpdateSessionDTO;
 
 public interface SessionService {
     SessionDTO create(CreateSessionDTO sessionDTO);
-    Session bookSeat(int sessionId);
+    SessionDTO bookSeat(int sessionId);
     void delete(int id);
     Optional<SessionDTO> findById(int id);
     SessionDTO update(UpdateSessionDTO sessionDTO);

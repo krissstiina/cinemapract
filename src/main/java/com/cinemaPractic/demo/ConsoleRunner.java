@@ -14,12 +14,12 @@ import com.cinemaPractic.demo.model.CreateHallDTO;
 import com.cinemaPractic.demo.model.CreateSessionDTO;
 import com.cinemaPractic.demo.model.CreateTicketDTO;
 import com.cinemaPractic.demo.model.CreateUserDTO;
+import com.cinemaPractic.demo.service.CinemaService;
 import com.cinemaPractic.demo.service.FilmService;
 import com.cinemaPractic.demo.service.HallService;
 import com.cinemaPractic.demo.service.SessionService;
 import com.cinemaPractic.demo.service.TicketService;
 import com.cinemaPractic.demo.service.UserService;
-import com.cinemaPractic.demo.service.CinemaService;
 
 @Component
 public class ConsoleRunner implements CommandLineRunner {
@@ -70,9 +70,9 @@ public class ConsoleRunner implements CommandLineRunner {
         CreateHallDTO hall1 = new CreateHallDTO(110, 1);
         hallService.create(hall1);
 
-        CreateSessionDTO session = new CreateSessionDTO(new Date(124, 04, 01, 12, 32, 0), 1, 2, 100);
+        CreateSessionDTO session = new CreateSessionDTO(new Date(124, 04, 01, 1, 32, 0), 1, 2, 2);
         sessionService.create(session);
-        CreateSessionDTO session1 = new CreateSessionDTO(new Date(124, 10, 01, 12, 32, 0), 1, 3, 100);
+        CreateSessionDTO session1 = new CreateSessionDTO(new Date(124, 10, 01, 1, 32, 0), 1, 2, 100);
         sessionService.create(session1);
 
         CreateTicketDTO ticket = new CreateTicketDTO(700, 1, 1);

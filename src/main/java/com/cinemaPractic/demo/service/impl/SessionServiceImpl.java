@@ -103,29 +103,29 @@ public class SessionServiceImpl implements SessionService {
     }
     
     @Override
-    public Session bookSeat(int sessionId) {
+    public SessionDTO bookSeat(int sessionId) {
         Optional<Session> sessionOptional = sessionRepository.findById(sessionId);
         if (sessionOptional.isPresent()) {
             Session session = sessionOptional.get();
             if (session.getAvailableSeats() > 0) {
 
                 session.setAvailableSeats(session.getAvailableSeats() - 1);
-                sessionRepository.save(session);
-                return session;
+                sessionRepository.update(session);
+                return modelMapper.map(session, SessionDTO.class);
             } else {
                 
                 List<Session> alternativeSessions = sessionRepository.findSessionsWithAvailableSeatsForFilm(session.getFilm().getId());
                 if (!alternativeSessions.isEmpty()) {
                     Collections.sort(alternativeSessions, Comparator.comparingInt(Session::getAvailableSeats).reversed());
                     Session alternativeSession = alternativeSessions.get(0);
-                    return alternativeSession;
+                    return modelMapper.map(alternativeSession,SessionDTO.class);
                 } else {
                     
                     return null;
                 }
             }
         } else {
-            
+
             return null;
         }
     }
