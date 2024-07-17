@@ -22,8 +22,6 @@ public class SessionRepositoryDao implements SessionRepository {
     @Autowired
     private BaseSessionRepo baseSessionRepo;
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public Session create(Session session) {

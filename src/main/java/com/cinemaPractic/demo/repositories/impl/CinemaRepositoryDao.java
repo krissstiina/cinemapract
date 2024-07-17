@@ -20,8 +20,6 @@ public class CinemaRepositoryDao implements CinemaRepository {
     @Autowired
     private BaseCinemaRepo baseCinemaRepo;
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public Cinema create(Cinema cinema) {
@@ -44,6 +42,6 @@ public class CinemaRepositoryDao implements CinemaRepository {
     }
 
 }
-
+@Repository
 interface BaseCinemaRepo extends JpaRepository<Cinema, Integer> {}
 

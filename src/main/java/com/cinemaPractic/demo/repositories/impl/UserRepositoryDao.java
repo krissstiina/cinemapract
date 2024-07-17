@@ -10,16 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.cinemaPractic.demo.entites.User;
 import com.cinemaPractic.demo.repositories.UserRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 @Repository
 public class UserRepositoryDao implements UserRepository{
     @Autowired
     private BaseUserRepo baseUserRepo;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
 
     @Override

@@ -8,23 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.cinemaPractic.demo.entites.Cinema;
-import com.cinemaPractic.demo.entites.Film;
 import com.cinemaPractic.demo.entites.Ticket;
 import com.cinemaPractic.demo.repositories.TicketRepository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 @Repository
 public class TicketRepositoryDao implements TicketRepository {
     @Autowired
     private BaseTicketRepo baseTicketRepo;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
 
     @Override

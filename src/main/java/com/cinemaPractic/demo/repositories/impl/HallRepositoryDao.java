@@ -18,9 +18,6 @@ public class HallRepositoryDao implements HallRepository {
     @Autowired
     private BaseHallRepo baseHallRepo;
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Override
     public Hall create(Hall hall) {
         return baseHallRepo.save(hall);
@@ -43,6 +40,6 @@ public class HallRepositoryDao implements HallRepository {
     }
 
 }
-
+@Repository
 interface BaseHallRepo extends JpaRepository<Hall, Integer> {}
 
