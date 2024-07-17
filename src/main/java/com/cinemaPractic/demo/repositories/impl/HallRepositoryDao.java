@@ -30,12 +30,6 @@ public class HallRepositoryDao implements HallRepository {
 
     @Transactional
     @Override
-    public void delete(int id) {
-        entityManager.remove(entityManager.find(Hall.class, id));
-    }
-
-    @Transactional
-    @Override
     public Hall update(Hall hall){
         return baseHallRepo.save(hall);
     }

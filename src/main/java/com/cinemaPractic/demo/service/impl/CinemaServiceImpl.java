@@ -33,11 +33,6 @@ public class CinemaServiceImpl extends CinemaNotFoundException implements Cinema
     }
 
     @Override
-    public void delete(int id) {
-        cinemaRepository.delete(id);
-    }
-
-    @Override
     public Optional<CinemaDTO> findById(int id){
         Optional<Cinema> cinema = cinemaRepository.findById(id);
         if (!cinema.isPresent()){

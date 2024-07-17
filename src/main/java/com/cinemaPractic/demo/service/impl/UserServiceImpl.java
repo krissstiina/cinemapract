@@ -32,11 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(int id) {
-        userRepository.delete(id);
-    }
-
-    @Override
     public Optional<UserDTO> findById(int id){
         Optional<User> user = userRepository.findById(id);
         if (!user.isPresent()){

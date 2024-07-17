@@ -33,12 +33,6 @@ public class FilmRepositoryDao implements FilmRepository  {
 
     @Transactional
     @Override
-    public void delete(int id) {
-        entityManager.remove(entityManager.find(Film.class, id));
-    }
-
-    @Transactional
-    @Override
     public Film update(Film film){
         return baseFilmRepo.save(film);
     }
@@ -63,6 +57,10 @@ public class FilmRepositoryDao implements FilmRepository  {
         return baseFilmRepo.findAllByUserId(id);
     }
 
+    @Override
+    public List<Film> findMostPopularFilms(){
+        return baseFilmRepo.findMostPopularFilms();
+    }
 }
 
 interface BaseFilmRepo extends JpaRepository<Film, Integer> {
@@ -72,6 +70,10 @@ interface BaseFilmRepo extends JpaRepository<Film, Integer> {
         @Param("genres") List<String> genres,
         @Param("amount") int amount
     );
-        @Query(value = "SELECT f FROM Film AS f JOIN Session AS s ON s.film = f JOIN Ticket AS t ON t.session = s JOIN t.user AS u WHERE u.id = :userId")
+    
+    @Query(value = "SELECT f FROM Film AS f JOIN Session AS s ON s.film = f JOIN Ticket AS t ON t.session = s JOIN t.user AS u WHERE u.id = :userId")
     List<Film> findAllByUserId(@Param("userId") Integer userId);
+
+    @Query(value = "SELECT f, count(t) AS top FROM Film AS f JOIN Session as s ON s.film = f JOIN Ticket AS t ON t.session = s GROUP BY f.id ORDER BY top DESC")
+    List<Film> findMostPopularFilms();
 }

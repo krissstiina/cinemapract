@@ -2,19 +2,31 @@ package com.cinemaPractic.demo.model;
 
 import java.util.Date;
 
+import com.cinemaPractic.demo.entites.Cinema;
+
 public class CreateSessionDTO {
     public Date date;
     public int hall;
     public int film;
+    public int cinema;
     public int availableSeats;
 
     protected CreateSessionDTO(){}
 
-    public CreateSessionDTO(Date date, int  hall, int film, int availableSeats){
+    public CreateSessionDTO(Date date, int  hall, int film, int cinema, int availableSeats){
         this.date = date;
         this.hall = hall;
         this.film = film;
+        this.cinema = cinema;
         this.availableSeats = availableSeats;
+    }
+
+    public int getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(int cinema) {
+        this.cinema = cinema;
     }
 
     

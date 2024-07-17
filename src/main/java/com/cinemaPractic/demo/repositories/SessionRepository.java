@@ -14,8 +14,6 @@ public interface SessionRepository {
     Session findSessionWithAvailableSeats(int id);
     List<Session> findSessionsWithAvailableSeatsForFilm(int id);
     Optional<Session> findById(int id);
-    void save(Session session);
-    void delete(int id);
     Session update(Session session);
     List<Session> findAll();
 }

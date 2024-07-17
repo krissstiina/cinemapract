@@ -1,6 +1,7 @@
 package com.cinemaPractic.demo.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.cinemaPractic.demo.model.CreateFilmDTO;
 import com.cinemaPractic.demo.model.FilmDTO;
 import com.cinemaPractic.demo.model.UpdateFilmDTO;
 import com.cinemaPractic.demo.repositories.FilmRepository;
+import com.cinemaPractic.demo.repositories.TicketRepository;
 import com.cinemaPractic.demo.service.FilmService;
 
 @Service
@@ -43,11 +45,6 @@ public class FilmServiceImpl implements FilmService {
             throw new FilmNotFoundException();
         }
         return Optional.of(modelMapper.map(film,FilmDTO.class));
-    }
-
-    @Override
-    public void delete(int id) {
-        filmRepository.delete(id);
     }
 
     @Override
@@ -79,11 +76,6 @@ public class FilmServiceImpl implements FilmService {
             genreRepetitions.put(film.getGenre(), genreRepetitions.get(film.getGenre()) + 1);
         }
 
-        // TODO: Remove
-        for (var entry : genreRepetitions.entrySet()) {
-            System.out.println(entry.getValue() + " " + entry.getKey());
-        }
-
         List<String> popularGenresSorted = genreRepetitions.entrySet()
             .stream()
             .sorted((left, right) -> right.getValue() - left.getValue())
@@ -100,5 +92,9 @@ public class FilmServiceImpl implements FilmService {
 
         return recommendedFilms.stream().map((film) -> modelMapper.map(film, FilmDTO.class)).toList();
     }
-    
+
+    @Override
+    public List<Film> getMostPopularFilms() {
+        return filmRepository.findMostPopularFilms();
+    }
 }

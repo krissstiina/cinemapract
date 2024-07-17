@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Film;
 import com.cinemaPractic.demo.entites.Ticket;
 import com.cinemaPractic.demo.repositories.TicketRepository;
@@ -33,12 +34,6 @@ public class TicketRepositoryDao implements TicketRepository {
 
     @Transactional
     @Override
-    public void delete(int id) {
-        entityManager.remove(entityManager.find(Ticket.class, id));
-    }
-
-    @Transactional
-    @Override
     public Ticket update(Ticket ticket){
         return baseTicketRepo.save(ticket);
     }
@@ -53,14 +48,7 @@ public class TicketRepositoryDao implements TicketRepository {
         return baseTicketRepo.findById(id);
     }
 
-    // @Override
-    // public List<Ticket> findTicketsByUser(int userId) {
-    //     return baseTicketRepo.findTicketsByUser(userId);
-    // }
-
 }
 interface BaseTicketRepo extends JpaRepository<Ticket, Integer> {
 
-    // @Query("SELECT t FROM Ticket t WHERE t.user.id = :userId")
-    // List<Ticket> findTicketsByUser(@Param("userId") int userId);
 }

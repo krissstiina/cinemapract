@@ -1,12 +1,17 @@
 package com.cinemaPractic.demo.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Film;
 import com.cinemaPractic.demo.entites.Hall;
 import com.cinemaPractic.demo.entites.Session;
@@ -21,6 +26,8 @@ import com.cinemaPractic.demo.model.CreateTicketDTO;
 import com.cinemaPractic.demo.model.SessionDTO;
 import com.cinemaPractic.demo.model.TicketDTO;
 import com.cinemaPractic.demo.model.UpdateTicketDTO;
+import com.cinemaPractic.demo.model.UserDTO;
+import com.cinemaPractic.demo.repositories.CinemaRepository;
 import com.cinemaPractic.demo.repositories.SessionRepository;
 import com.cinemaPractic.demo.repositories.TicketRepository;
 import com.cinemaPractic.demo.repositories.UserRepository;
@@ -37,6 +44,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CinemaRepository cinemaRepository;
     
     private ModelMapper modelMapper;
     public TicketServiceImpl(ModelMapper modelMapper){
@@ -51,11 +61,6 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = new Ticket(ticketDTO.getPrice(),session, user);
         ticketRepository.create(ticket);
         return modelMapper.map(ticket, TicketDTO.class);
-    }
-
-    @Override
-    public void delete(int id) {
-        ticketRepository.delete(id);
     }
 
     @Override
@@ -94,31 +99,6 @@ public class TicketServiceImpl implements TicketService {
     public List<TicketDTO> findAll() {
         return ticketRepository.findAll().stream().map((ticket) -> modelMapper.map(ticket,TicketDTO.class)).toList();
     }
+
 }
 
-// public class BonusService {
-
-//     private final TicketRepository ticketRepository;
-//     private final UserRepository userRepository;
-
-//     public BonusService(TicketRepository ticketRepository, UserRepository userRepository) {
-//         this.ticketRepository = ticketRepository;
-//         this.userRepository = userRepository;
-//     }
-
-//     public void addBonusPoints(int id) {
-//         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Пользователь не найден"));
-
-//         List<Ticket> tickets = ticketRepository.findTicketsByUser(id);
-//         int bonusPoints = tickets.size(); // 1 билет = 1 балл
-
-//         user.setPoints(user.getPoints() + bonusPoints);
-//         userRepository.save(user);
-//     }
-
-//     public int getBonusPointsValue(int bonusPoints) {
-//         return bonusPoints * 10; // 1 балл = 10 рублей
-//     }
-
-
-// }

@@ -12,7 +12,7 @@ public interface FilmRepository {
     List<Film> findAllByUserId(int id);
     List<Film> findAll();
     Film create(Film film);
-    void delete(int id);
     Film update(Film film);
     Optional<Film> findById(int id);
+    List<Film> findMostPopularFilms();
 }

@@ -9,7 +9,6 @@ import com.cinemaPractic.demo.model.UpdateHallDTO;
 
 public interface HallService {
     HallDTO create(CreateHallDTO hallDTO);
-    void delete(int id);
     Optional<HallDTO> findById(int id);
     HallDTO update(UpdateHallDTO hallDTO);
     List<HallDTO> findAll();

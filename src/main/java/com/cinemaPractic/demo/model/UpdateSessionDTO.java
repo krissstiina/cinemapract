@@ -8,16 +8,26 @@ public class UpdateSessionDTO {
     public Date date;
     public int hall;
     public int film;
+    public int cinema;
     public int availableSeats;
 
     protected UpdateSessionDTO(){}
 
-    public UpdateSessionDTO(int id, Date date, int  hall, int film, int availableSeats){
+    public UpdateSessionDTO(int id, Date date, int  hall, int film, int cinema, int availableSeats){
         this.id = id;
         this.date = date;
         this.hall = hall;
         this.film = film;
+        this.cinema = cinema;
         this.availableSeats = availableSeats;
+    }
+
+    public int getCinema() {
+        return cinema;
+    }
+
+    public void setCinema(int cinema) {
+        this.cinema = cinema;
     }
 
     public int getId() {

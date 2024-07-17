@@ -47,11 +47,6 @@ public class HallServiceImpl implements HallService {
     }
 
     @Override
-    public void delete(int id) {
-        hallRepository.delete(id);
-    }
-
-    @Override
     public Optional<HallDTO> findById(int id){
         Optional<Hall> hall = hallRepository.findById(id);
         if (!hall.isPresent()){

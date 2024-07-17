@@ -12,5 +12,4 @@ public interface TicketService {
     Optional<TicketDTO> findById(int id);
     TicketDTO update(UpdateTicketDTO ticketTO);
     List<TicketDTO> findAll();
-    void delete(int id);
 }

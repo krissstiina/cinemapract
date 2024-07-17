@@ -9,7 +9,6 @@ import com.cinemaPractic.demo.model.UserDTO;
 
 public interface UserService {
     UserDTO create(CreateUserDTO userDTO);
-    public void delete(int id);
     public Optional<UserDTO> findById(int id);
     public List<UserDTO> findAll();
     UserDTO update(UpdateUserDTO userDTO);

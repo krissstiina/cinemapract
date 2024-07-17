@@ -12,7 +12,6 @@ import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 public interface  CinemaService {
     CinemaDTO create(CreateCinemaDTO cinemaDTO);
     Optional<CinemaDTO> findById(int id);
-    void delete(int id);
     CinemaDTO update(UpdateCinemaDTO cinemaDTO);
     List<CinemaDTO> findAll();
 }

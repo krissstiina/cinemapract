@@ -33,12 +33,6 @@ public class SessionRepositoryDao implements SessionRepository {
 
     @Transactional
     @Override
-    public void delete(int id) {
-        entityManager.remove(entityManager.find(Session.class, id));
-    }
-
-    @Transactional
-    @Override
     public Session update(Session session){
         return baseSessionRepo.save(session);
     }
@@ -51,12 +45,6 @@ public class SessionRepositoryDao implements SessionRepository {
     @Override
     public Optional<Session> findById(int id){
         return baseSessionRepo.findById(id);
-    }
-
-    @Transactional
-    @Override
-    public void save(Session session) {
-        entityManager.persist(session);
     }
 
     @Override

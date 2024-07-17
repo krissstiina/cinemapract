@@ -33,6 +33,7 @@ public class Mapper {
             mapper.map(session -> session.getDate(), SessionDTO::setDate);
             mapper.map(session -> session.getHall().getId(), SessionDTO::setHall);
             mapper.map(session -> session.getFilm().getId(), SessionDTO::setFilm);
+            mapper.map(session -> session.getCinema().getId(), SessionDTO::setCinema);
             mapper.map(session -> session.getAvailableSeats(), SessionDTO::setAvailableSeats);
         });
 

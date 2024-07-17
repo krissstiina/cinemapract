@@ -31,12 +31,6 @@ public class CinemaRepositoryDao implements CinemaRepository {
 
     @Transactional
     @Override
-    public void delete(int id) {
-        entityManager.remove(entityManager.find(Cinema.class, id));
-    }
-
-    @Transactional
-    @Override
     public Cinema update(Cinema cinema){
         return baseCinemaRepo.save(cinema);
     }

@@ -10,9 +10,7 @@ import com.cinemaPractic.demo.entites.User;
 @Repository
 public interface UserRepository {
     User create(User user);
-    void delete(int id);
     User update(User user);
     List<User> findAll();
     Optional<User> findById(int id);
-    void save(User user);
 }

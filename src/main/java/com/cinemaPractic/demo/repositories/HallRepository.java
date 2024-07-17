@@ -10,7 +10,6 @@ import com.cinemaPractic.demo.entites.Hall;
 @Repository
 public interface HallRepository {
     Hall create(Hall hall);
-    void delete(int id);
     Hall update(Hall hall);
     List<Hall> findAll();
     Optional<Hall> findById(int id);

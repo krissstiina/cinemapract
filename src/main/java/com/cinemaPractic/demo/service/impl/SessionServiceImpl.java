@@ -9,15 +9,18 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Film;
 import com.cinemaPractic.demo.entites.Hall;
 import com.cinemaPractic.demo.entites.Session;
+import com.cinemaPractic.demo.exception.CinemaNotFoundException;
 import com.cinemaPractic.demo.exception.FilmNotFoundException;
 import com.cinemaPractic.demo.exception.HallNotFoundException;
 import com.cinemaPractic.demo.exception.SessionNotFoundException;
 import com.cinemaPractic.demo.model.CreateSessionDTO;
 import com.cinemaPractic.demo.model.SessionDTO;
 import com.cinemaPractic.demo.model.UpdateSessionDTO;
+import com.cinemaPractic.demo.repositories.CinemaRepository;
 import com.cinemaPractic.demo.repositories.FilmRepository;
 import com.cinemaPractic.demo.repositories.HallRepository;
 import com.cinemaPractic.demo.repositories.SessionRepository;
@@ -36,6 +39,10 @@ public class SessionServiceImpl implements SessionService {
     @Autowired
     private FilmRepository filmRepository;
 
+    @Autowired
+    private CinemaRepository cinemaRepository;
+
+
     private ModelMapper modelMapper;
     public SessionServiceImpl(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
@@ -45,20 +52,11 @@ public class SessionServiceImpl implements SessionService {
     public SessionDTO create(CreateSessionDTO sessionDTO) {
         Hall hall = hallRepository.findById(sessionDTO.getHall()).orElseThrow(() -> new HallNotFoundException());
         Film film = filmRepository.findById(sessionDTO.getFilm()).orElseThrow(() -> new FilmNotFoundException());
+        Cinema cinema = cinemaRepository.findById(sessionDTO.getCinema()).orElseThrow(() -> new CinemaNotFoundException());
         
-        Session session = new Session(sessionDTO.getDate(),hall, film, sessionDTO.getAvailableSeats());
+        Session session = new Session(sessionDTO.getDate(),hall, film, cinema, sessionDTO.getAvailableSeats());
         sessionRepository.create(session);
         return modelMapper.map(session, SessionDTO.class);
-    }
-
-    @Override
-    public void delete(int id) {
-        sessionRepository.delete(id);
-    }
-
-    @Override
-    public void save(Session session){
-        sessionRepository.save(session);
     }
 
     @Override

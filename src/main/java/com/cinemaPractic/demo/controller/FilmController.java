@@ -53,4 +53,10 @@ public class FilmController {
         List<FilmDTO> recommendations = filmService.getRecommendations(userId);
         return ResponseEntity.ok(recommendations);
     }
+
+    @GetMapping("/popular")
+    public List<Film> getMostPopularFilms() {
+        return filmService.getMostPopularFilms();
+    }
+
 }
