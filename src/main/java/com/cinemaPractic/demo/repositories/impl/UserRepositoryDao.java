@@ -21,13 +21,12 @@ public class UserRepositoryDao implements UserRepository{
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+
     @Override
     public User create(User user) {
         return baseUserRepo.save(user);
     }
 
-    @Transactional
     @Override
     public User update(User user){
         return baseUserRepo.save(user);
@@ -44,7 +43,7 @@ public class UserRepositoryDao implements UserRepository{
     }
     
 }
-
+@Repository
 interface BaseUserRepo extends JpaRepository<User, Integer> {
 
 }

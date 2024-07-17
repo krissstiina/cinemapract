@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cinemaPractic.demo.entites.Hall;
 import com.cinemaPractic.demo.repositories.HallRepository;
@@ -22,13 +21,12 @@ public class HallRepositoryDao implements HallRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
     @Override
     public Hall create(Hall hall) {
         return baseHallRepo.save(hall);
     }
 
-    @Transactional
+
     @Override
     public Hall update(Hall hall){
         return baseHallRepo.save(hall);

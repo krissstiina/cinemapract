@@ -25,13 +25,12 @@ public class FilmRepositoryDao implements FilmRepository  {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+
     @Override
     public Film create(Film film) {
         return baseFilmRepo.save(film);
     }
 
-    @Transactional
     @Override
     public Film update(Film film){
         return baseFilmRepo.save(film);

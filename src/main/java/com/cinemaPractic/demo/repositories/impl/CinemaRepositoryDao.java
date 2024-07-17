@@ -23,13 +23,11 @@ public class CinemaRepositoryDao implements CinemaRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
     @Override
     public Cinema create(Cinema cinema) {
         return baseCinemaRepo.save(cinema);
     }
 
-    @Transactional
     @Override
     public Cinema update(Cinema cinema){
         return baseCinemaRepo.save(cinema);

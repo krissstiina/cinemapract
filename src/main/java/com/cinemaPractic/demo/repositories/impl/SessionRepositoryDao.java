@@ -25,13 +25,12 @@ public class SessionRepositoryDao implements SessionRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
     @Override
     public Session create(Session session) {
         return baseSessionRepo.save(session);
     }
 
-    @Transactional
+
     @Override
     public Session update(Session session){
         return baseSessionRepo.save(session);
@@ -58,7 +57,7 @@ public class SessionRepositoryDao implements SessionRepository {
         return baseSessionRepo.findSessionsWithAvailableSeatsForFilm(id);
     }
 }
-
+@Repository
 interface BaseSessionRepo extends JpaRepository<Session, Integer> {
 
     @Query(value = "SELECT s FROM Session s WHERE s.id = :sessionId")

@@ -26,13 +26,12 @@ public class TicketRepositoryDao implements TicketRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+
     @Override
     public Ticket create(Ticket ticket) {
         return baseTicketRepo.save(ticket);
     }
 
-    @Transactional
     @Override
     public Ticket update(Ticket ticket){
         return baseTicketRepo.save(ticket);
@@ -49,6 +48,7 @@ public class TicketRepositoryDao implements TicketRepository {
     }
 
 }
+@Repository
 interface BaseTicketRepo extends JpaRepository<Ticket, Integer> {
 
 }
