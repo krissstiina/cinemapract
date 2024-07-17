@@ -40,6 +40,6 @@ public class HallRepositoryDao implements HallRepository {
     }
 
 }
-@Repository
+
 interface BaseHallRepo extends JpaRepository<Hall, Integer> {}
 

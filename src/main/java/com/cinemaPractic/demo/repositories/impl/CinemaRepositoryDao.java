@@ -42,6 +42,5 @@ public class CinemaRepositoryDao implements CinemaRepository {
     }
 
 }
-@Repository
 interface BaseCinemaRepo extends JpaRepository<Cinema, Integer> {}
 

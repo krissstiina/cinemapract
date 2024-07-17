@@ -58,7 +58,7 @@ public class FilmRepositoryDao implements FilmRepository  {
         return baseFilmRepo.findMostPopularFilms();
     }
 }
-@Repository
+
 interface BaseFilmRepo extends JpaRepository<Film, Integer> {
 
     @Query(value = "SELECT f FROM Film f WHERE f.genre IN :genres ORDER BY f.rating DESC LIMIT :amount")

@@ -37,7 +37,7 @@ public class UserRepositoryDao implements UserRepository{
     }
     
 }
-@Repository
+
 interface BaseUserRepo extends JpaRepository<User, Integer> {
 
 }

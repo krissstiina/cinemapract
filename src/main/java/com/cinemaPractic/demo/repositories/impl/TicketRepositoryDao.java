@@ -39,7 +39,7 @@ public class TicketRepositoryDao implements TicketRepository {
     }
 
 }
-@Repository
+
 interface BaseTicketRepo extends JpaRepository<Ticket, Integer> {
 
 }
