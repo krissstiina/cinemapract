@@ -9,20 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cinemaPractic.demo.entites.Cinema;
-import com.cinemaPractic.demo.entites.Film;
-import com.cinemaPractic.demo.entites.Hall;
 import com.cinemaPractic.demo.entites.Session;
-import com.cinemaPractic.demo.exception.CinemaNotFoundException;
-import com.cinemaPractic.demo.exception.FilmNotFoundException;
-import com.cinemaPractic.demo.exception.HallNotFoundException;
-import com.cinemaPractic.demo.exception.SessionNotFoundException;
-import com.cinemaPractic.demo.model.CreateSessionDTO;
 import com.cinemaPractic.demo.model.SessionDTO;
-import com.cinemaPractic.demo.model.UpdateSessionDTO;
-import com.cinemaPractic.demo.repositories.CinemaRepository;
-import com.cinemaPractic.demo.repositories.FilmRepository;
-import com.cinemaPractic.demo.repositories.HallRepository;
 import com.cinemaPractic.demo.repositories.SessionRepository;
 import com.cinemaPractic.demo.service.SessionService;
 
@@ -33,72 +21,7 @@ public class SessionServiceImpl implements SessionService {
     @Autowired
     private SessionRepository sessionRepository;
 
-    @Autowired
-    private HallRepository hallRepository;
-
-    @Autowired
-    private FilmRepository filmRepository;
-
-    @Autowired
-    private CinemaRepository cinemaRepository;
-
-
-    private ModelMapper modelMapper;
-    public SessionServiceImpl(ModelMapper modelMapper){
-        this.modelMapper = modelMapper;
-    }
-
-    @Override
-    public SessionDTO create(CreateSessionDTO sessionDTO) {
-        Hall hall = hallRepository.findById(sessionDTO.getHall()).orElseThrow(() -> new HallNotFoundException());
-        Film film = filmRepository.findById(sessionDTO.getFilm()).orElseThrow(() -> new FilmNotFoundException());
-        Cinema cinema = cinemaRepository.findById(sessionDTO.getCinema()).orElseThrow(() -> new CinemaNotFoundException());
-        
-        Session session = new Session(sessionDTO.getDate(),hall, film, cinema, sessionDTO.getAvailableSeats());
-        sessionRepository.create(session);
-        return modelMapper.map(session, SessionDTO.class);
-    }
-
-    @Override
-    public Optional<SessionDTO> findById(int id){
-        Optional<Session> session = sessionRepository.findById(id);
-        if (!session.isPresent()){
-            throw new SessionNotFoundException();
-        }
-        return Optional.of(modelMapper.map(session,SessionDTO.class));
-    }
-
-    @Override
-    public SessionDTO update(UpdateSessionDTO updateSessionDTO) {
-        Optional<Session> session = sessionRepository.findById(updateSessionDTO.getId());
-        if (!session.isPresent()) {
-            throw new SessionNotFoundException();
-        }
-
-        if(updateSessionDTO.getHall() != 0) {
-            Hall hall = hallRepository.findById(updateSessionDTO.getHall()).orElseThrow(() -> new HallNotFoundException());
-            session.get().setHall(hall);
-        }
-
-        if (updateSessionDTO.getFilm() != 0) {
-            Film film = filmRepository.findById(updateSessionDTO.getFilm()).orElseThrow(() -> new FilmNotFoundException());
-            session.get().setFilm(film);
-        }
-
-        session.get().setDate(updateSessionDTO.getDate());
-        session.get().setAvailableSeats(updateSessionDTO.getAvailableSeats());
-        sessionRepository.update(session.get());
-
-        return modelMapper.map(session, SessionDTO.class);
-    }
-
-
-    
-
-    @Override
-    public List<SessionDTO> findAll() {
-        return sessionRepository.findAll().stream().map((session) -> modelMapper.map(session,SessionDTO.class)).toList();
-    }
+    private ModelMapper modelMapper = new ModelMapper();
     
     @Override
     public SessionDTO bookSeat(int sessionId) {
