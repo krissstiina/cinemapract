@@ -6,20 +6,19 @@ import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
 import com.cinemaPractic.demo.entites.Session;
-import com.cinemaPractic.demo.repositories.BaseRepository;
 import com.cinemaPractic.demo.repositories.SessionRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class SessionRepositoryImpl extends BaseRepository<Session, Integer> implements SessionRepository {
+public class SessionRepositoryImpl extends BaseRepositoryImpl<Session> implements SessionRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public SessionRepositoryImpl(Class<Session> entity) {
-        super(entity);
+    public SessionRepositoryImpl() {
+        super(Session.class);
     }
 
     @Override

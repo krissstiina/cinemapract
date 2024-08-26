@@ -5,20 +5,19 @@ import org.springframework.stereotype.Repository;
 
 import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Film;
-import com.cinemaPractic.demo.repositories.BaseRepository;
 import com.cinemaPractic.demo.repositories.FilmRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class FilmRepositoryImpl extends BaseRepository<Film, Integer>  implements FilmRepository  {
+public class FilmRepositoryImpl extends BaseRepositoryImpl<Film> implements FilmRepository  {
     
     @PersistenceContext
     private EntityManager entityManager;
 
-    public FilmRepositoryImpl(Class<Film> entity) {
-        super(entity);
+    public FilmRepositoryImpl() {
+        super(Film.class);
     }
 
     @Override

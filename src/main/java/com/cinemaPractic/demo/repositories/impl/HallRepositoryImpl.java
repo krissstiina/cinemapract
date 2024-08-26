@@ -9,19 +9,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cinemaPractic.demo.entites.Hall;
-import com.cinemaPractic.demo.repositories.BaseRepository;
 import com.cinemaPractic.demo.repositories.HallRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class HallRepositoryImpl extends BaseRepository<Hall, Integer> implements HallRepository {
+public class HallRepositoryImpl extends BaseRepositoryImpl<Hall> implements HallRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public HallRepositoryImpl(Class<Hall> entity) {
-        super(entity);
+    public HallRepositoryImpl() {
+        super(Hall.class);
     }
 }

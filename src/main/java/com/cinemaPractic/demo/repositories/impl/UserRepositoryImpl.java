@@ -9,19 +9,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.cinemaPractic.demo.entites.User;
-import com.cinemaPractic.demo.repositories.BaseRepository;
 import com.cinemaPractic.demo.repositories.UserRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
 @Repository
-public class UserRepositoryImpl extends BaseRepository<User, Integer> implements UserRepository{
+public class UserRepositoryImpl extends BaseRepositoryImpl<User> implements UserRepository{
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public UserRepositoryImpl(Class<User> entity) {
-        super(entity);
+    public UserRepositoryImpl() {
+        super(User.class);
     }
 }
