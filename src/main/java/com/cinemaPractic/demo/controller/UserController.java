@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cinemaPractic.demo.model.CreateUserDTO;
+import com.cinemaPractic.demo.model.TicketDTO;
 import com.cinemaPractic.demo.model.UpdateUserDTO;
 import com.cinemaPractic.demo.model.UserDTO;
 import com.cinemaPractic.demo.service.UserService;
@@ -23,17 +24,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")
-    public UserDTO getById(@PathVariable int id) {
-        Optional<UserDTO> userDTO = userService.findById(id);
-        return userDTO.get();
-    }
-
-    @GetMapping("")
-    public List<UserDTO> getAll(){
-        return userService.findAll();
-    }
-
     @PostMapping("")
     public UserDTO create(@RequestBody CreateUserDTO createUserDTO){
         return userService.create(createUserDTO);
@@ -42,5 +32,10 @@ public class UserController {
     @PatchMapping("")
     public UserDTO update(@RequestBody UpdateUserDTO updateUserDTO){
         return userService.update(updateUserDTO);
+    }
+
+    @GetMapping("/{id}")
+    public UserDTO getById(@PathVariable int id){
+        return userService.findById(id);
     }
 }

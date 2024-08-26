@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cinemaPractic.demo.model.CinemaDTO;
+import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateSessionDTO;
 import com.cinemaPractic.demo.model.SessionDTO;
+import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateSessionDTO;
 import com.cinemaPractic.demo.service.SessionService;
 
@@ -25,25 +28,14 @@ public class SessionController {
     @Autowired
     private SessionService sessionService;
 
-    @GetMapping("/{id}")
-    public SessionDTO getById(@PathVariable int id) {
-        Optional<SessionDTO> sessionDTO = sessionService.findById(id);
-        return sessionDTO.get();
-    }
-
-    @GetMapping("")
-    public List<SessionDTO> getAll(){
-        return sessionService.findAll();
-    }
-
     @PostMapping("")
     public SessionDTO create(@RequestBody CreateSessionDTO createSessionDTO){
         return sessionService.create(createSessionDTO);
     }
 
-    @PatchMapping("")
-    public SessionDTO update(@RequestBody UpdateSessionDTO updateSessionDTO){
-        return sessionService.update(updateSessionDTO);
+    @GetMapping("/{id}")
+    public SessionDTO getById(@PathVariable int id){
+        return sessionService.findById(id);
     }
     
     @GetMapping("/{sessionId}/book")
@@ -55,5 +47,4 @@ public class SessionController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
 }

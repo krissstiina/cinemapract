@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cinemaPractic.demo.entites.Film;
 import com.cinemaPractic.demo.entites.User;
+import com.cinemaPractic.demo.model.CinemaDTO;
+import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateFilmDTO;
 import com.cinemaPractic.demo.model.FilmDTO;
+import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateFilmDTO;
 import com.cinemaPractic.demo.service.FilmService;
 
@@ -26,26 +29,19 @@ public class FilmController {
     @Autowired
     private FilmService filmService;
 
-
-    @GetMapping("/{id}")
-    public FilmDTO getById(@PathVariable int id) {
-        Optional<FilmDTO> filmDTO = filmService.findById(id);
-        return filmDTO.get();
-    }
-
-    @GetMapping("")
-    public List<FilmDTO> getAll(){
-        return filmService.findAll();
-    }
-
     @PostMapping("")
     public FilmDTO create(@RequestBody CreateFilmDTO createFilmDTO){
         return filmService.create(createFilmDTO);
     }
 
     @PatchMapping("")
-    public FilmDTO update(@RequestBody UpdateFilmDTO updateFilmDTO){
-        return filmService.update(updateFilmDTO);
+    public FilmDTO update(@RequestBody UpdateFilmDTO filmUpdateDto){
+        return filmService.update(filmUpdateDto);
+    }
+
+    @GetMapping("/{id}")
+    public FilmDTO getById(@PathVariable int id){
+        return filmService.findById(id);
     }
 
     @GetMapping("/{userId}/recomendation")

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cinemaPractic.demo.model.CinemaDTO;
+import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateTicketDTO;
 import com.cinemaPractic.demo.model.TicketDTO;
+import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateTicketDTO;
 import com.cinemaPractic.demo.service.TicketService;
 
@@ -24,14 +27,8 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/{id}")
-    public TicketDTO getById(@PathVariable int id) {
-        Optional<TicketDTO> ticketDTO = ticketService.findById(id);
-        return ticketDTO.get();
-    }
-
-    @GetMapping("")
-    public List<TicketDTO> getAll(){
-        return ticketService.findAll();
+    public TicketDTO getById(@PathVariable int id){
+        return ticketService.findById(id);
     }
 
     @PostMapping("")
@@ -39,8 +36,4 @@ public class TicketController {
         return ticketService.create(createTicketDTO);
     }
 
-    @PatchMapping("")
-    public TicketDTO update(@RequestBody UpdateTicketDTO updateTicketDTO){
-        return ticketService.update(updateTicketDTO);
-    }
 }
