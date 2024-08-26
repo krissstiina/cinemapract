@@ -10,5 +10,9 @@ import com.cinemaPractic.demo.model.UpdateFilmDTO;
 
 public interface FilmService {
     List<FilmDTO> getRecommendations(int userId);
+    FilmDTO findById(int id);
     public List<Film> getMostPopularFilms();
+    FilmDTO update(UpdateFilmDTO filmUpdateDTO);
+    FilmDTO create(CreateFilmDTO filmCreateDto);
+
 }

@@ -4,15 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Film;
+import com.cinemaPractic.demo.model.CinemaDTO;
+import com.cinemaPractic.demo.model.CreateCinemaDTO;
+import com.cinemaPractic.demo.model.CreateFilmDTO;
 import com.cinemaPractic.demo.model.FilmDTO;
+import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateFilmDTO;
+import com.cinemaPractic.demo.repositories.CinemaRepository;
 import com.cinemaPractic.demo.repositories.FilmRepository;
-import com.cinemaPractic.demo.repositories.TicketRepository;
 import com.cinemaPractic.demo.service.FilmService;
 
 @Service
@@ -20,10 +26,30 @@ public class FilmServiceImpl implements FilmService {
 
     @Autowired
     private FilmRepository filmRepository;
-    
-    private ModelMapper modelMapper;
-    public FilmServiceImpl(ModelMapper modelMapper){
-        this.modelMapper = modelMapper;
+    @Autowired
+    private ModelMapper mapper;
+
+    @Override
+    public FilmDTO create(CreateFilmDTO filmCreateDto) {
+        Film film = mapper.map(filmCreateDto, Film.class);
+        filmRepository.create(film);
+        return mapper.map(film, FilmDTO.class);
+    }
+
+    @Override
+    public FilmDTO findById(int id) {
+        Optional<Film> film = filmRepository.findById(id);
+
+
+        return mapper.map(film, FilmDTO.class);
+    }
+
+    @Override
+    public FilmDTO update(UpdateFilmDTO filmUpdateDTO) {
+        Optional<Film> film = filmRepository.findById(filmUpdateDTO.getId());
+        film.get().setName(filmUpdateDTO.getName());
+        filmRepository.update(film.get());
+        return mapper.map(film,FilmDTO.class);
     }
 
     @Override
@@ -54,7 +80,7 @@ public class FilmServiceImpl implements FilmService {
         int recommendedFilmsCount = 5;
         List<Film> recommendedFilms = filmRepository.findAllFilmsSortedByRating(mostPopularGenres, recommendedFilmsCount);
 
-        return recommendedFilms.stream().map((film) -> modelMapper.map(film, FilmDTO.class)).toList();
+        return recommendedFilms.stream().map((film) -> mapper.map(film, FilmDTO.class)).toList();
     }
 
     @Override

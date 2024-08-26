@@ -11,23 +11,40 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Ticket;
+import com.cinemaPractic.demo.model.CinemaDTO;
+import com.cinemaPractic.demo.model.CreateCinemaDTO;
+import com.cinemaPractic.demo.model.CreateTicketDTO;
 import com.cinemaPractic.demo.model.TicketDTO;
+import com.cinemaPractic.demo.model.UpdateCinemaDTO;
+import com.cinemaPractic.demo.model.UpdateTicketDTO;
+import com.cinemaPractic.demo.repositories.CinemaRepository;
+import com.cinemaPractic.demo.repositories.TicketRepository;
 import com.cinemaPractic.demo.repositories.impl.TicketRepositoryImpl;
 import com.cinemaPractic.demo.service.TicketService;
 
 @Service
 public class TicketServiceImpl implements TicketService {
     @Autowired
-    private TicketRepositoryImpl ticketRepository;
-
-    private ModelMapper modelMapper = new ModelMapper();
+    private TicketRepository ticketRepository;
+    @Autowired
+    private ModelMapper mapper;
 
     @Override
-    public void addTicket(TicketDTO ticket) {
-        Ticket ticketToAdd = modelMapper.map(ticket, Ticket.class);
-
-        ticketRepository.save(ticketToAdd);
+    public TicketDTO create(CreateTicketDTO ticketCreateDto) {
+        Ticket ticket = mapper.map(ticketCreateDto, Ticket.class);
+        ticketRepository.create(ticket);
+        return mapper.map(ticket, TicketDTO.class);
     }
+
+    @Override
+    public TicketDTO findById(int id) {
+        Optional<Ticket> ticket = ticketRepository.findById(id);
+        return mapper.map(ticket, TicketDTO.class);
+    }
+
+    
+
 }
 
