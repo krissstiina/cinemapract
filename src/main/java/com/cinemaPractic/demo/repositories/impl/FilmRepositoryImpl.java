@@ -37,7 +37,7 @@ public class FilmRepositoryImpl extends BaseRepositoryImpl<Film> implements Film
 
     @Override
     public List<Film> findMostPopularFilms() {
-        return entityManager.createQuery("SELECT f, count(t) AS top FROM Film AS f JOIN Session as s ON s.film = f JOIN Ticket AS t ON t.session = s GROUP BY f.id ORDER BY top DESC", Film.class)
+        return entityManager.createQuery("SELECT f AS top FROM Film AS f JOIN Session as s ON s.film = f JOIN Ticket AS t ON t.session = s GROUP BY f.id ORDER BY top DESC", Film.class)
                 .getResultList();
     }
 

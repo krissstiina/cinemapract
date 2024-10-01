@@ -10,6 +10,7 @@ import com.cinemaPractic.demo.repositories.SessionRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 
 @Repository
 public class SessionRepositoryImpl extends BaseRepositoryImpl<Session> implements SessionRepository {
@@ -40,6 +41,7 @@ public class SessionRepositoryImpl extends BaseRepositoryImpl<Session> implement
         return Optional.ofNullable(entityManager.find(Session.class, sessionId));
     }
 
+    @Transactional
     @Override
     public void update(Session session){
         entityManager.persist(session);
