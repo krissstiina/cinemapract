@@ -37,8 +37,6 @@ public class CinemaServiceImpl extends CinemaNotFoundException implements Cinema
     @Override
     public CinemaDTO findById(int id) {
         Optional<Cinema> cinema = cinemaRepository.findById(id);
-
-
         return mapper.map(cinema, CinemaDTO.class);
     }
 

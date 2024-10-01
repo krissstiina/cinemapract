@@ -3,21 +3,16 @@ package com.cinemaPractic.demo.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cinemaPractic.demo.entites.Cinema;
 import com.cinemaPractic.demo.entites.Film;
-import com.cinemaPractic.demo.model.CinemaDTO;
-import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateFilmDTO;
 import com.cinemaPractic.demo.model.FilmDTO;
-import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateFilmDTO;
-import com.cinemaPractic.demo.repositories.CinemaRepository;
 import com.cinemaPractic.demo.repositories.FilmRepository;
 import com.cinemaPractic.demo.service.FilmService;
 

@@ -6,10 +6,14 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 import com.cinemaPractic.demo.entites.Cinema;
+import com.cinemaPractic.demo.entites.Ticket;
 import com.cinemaPractic.demo.entites.User;
+import com.cinemaPractic.demo.exception.SessionNotFoundException;
+import com.cinemaPractic.demo.exception.UserNotFoundException;
 import com.cinemaPractic.demo.model.CinemaDTO;
 import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateUserDTO;
+import com.cinemaPractic.demo.model.TicketDTO;
 import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateUserDTO;
 import com.cinemaPractic.demo.model.UserDTO;
@@ -32,11 +36,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO findById(int id) {
+    public Optional<UserDTO> findById(int id){
         Optional<User> user = userRepository.findById(id);
-
-
-        return mapper.map(user, UserDTO.class);
+        if (!user.isPresent()){
+            throw new UserNotFoundException();
+        }
+        return Optional.of(mapper.map(user,UserDTO.class));
     }
 
     @Override
