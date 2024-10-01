@@ -34,9 +34,11 @@ public class SessionController {
     }
 
     @GetMapping("/{id}")
-    public SessionDTO getById(@PathVariable int id){
-        return sessionService.findById(id);
+    public SessionDTO getById(@PathVariable int id) {
+        Optional<SessionDTO> sessionDTO = sessionService.findById(id);
+        return sessionDTO.get();
     }
+
     
     @GetMapping("/{sessionId}/book")
     public ResponseEntity<SessionDTO> bookSeat(@PathVariable int sessionId) {

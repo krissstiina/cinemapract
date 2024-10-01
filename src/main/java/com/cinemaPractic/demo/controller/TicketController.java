@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cinemaPractic.demo.model.CinemaDTO;
 import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateTicketDTO;
+import com.cinemaPractic.demo.model.SessionDTO;
 import com.cinemaPractic.demo.model.TicketDTO;
 import com.cinemaPractic.demo.model.UpdateCinemaDTO;
 import com.cinemaPractic.demo.model.UpdateTicketDTO;
@@ -27,8 +28,9 @@ public class TicketController {
     private TicketService ticketService;
 
     @GetMapping("/{id}")
-    public TicketDTO getById(@PathVariable int id){
-        return ticketService.findById(id);
+    public TicketDTO getById(@PathVariable int id) {
+        Optional<TicketDTO> ticketDTO = ticketService.findById(id);
+        return ticketDTO.get();
     }
 
     @PostMapping("")

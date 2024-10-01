@@ -12,12 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cinemaPractic.demo.model.CinemaDTO;
-import com.cinemaPractic.demo.model.CreateCinemaDTO;
 import com.cinemaPractic.demo.model.CreateHallDTO;
 import com.cinemaPractic.demo.model.HallDTO;
-import com.cinemaPractic.demo.model.UpdateCinemaDTO;
-import com.cinemaPractic.demo.model.UpdateHallDTO;
 import com.cinemaPractic.demo.service.HallService;
 
 @RestController
@@ -27,8 +23,9 @@ public class HallController {
     private HallService hallService;
 
     @GetMapping("/{id}")
-    public HallDTO getById(@PathVariable int id){
-        return hallService.findById(id);
+    public HallDTO getById(@PathVariable int id) {
+        Optional<HallDTO> hallDTO = hallService.findById(id);
+        return hallDTO.get();
     }
 
     @PostMapping("")
