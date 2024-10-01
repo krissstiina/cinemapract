@@ -1,16 +1,20 @@
 package com.cinemaPractic.demo.model;
 
+import java.nio.file.attribute.UserDefinedFileAttributeView;
+
+import org.apache.catalina.SessionIdGenerator;
+
 public class TicketDTO {
     public int id;
     public int price;
-    public int session;
-    public int user;
+    public int sessionId;
+    public int userId;
 
     public TicketDTO(int id, int price, int session, int user){
         this.id = id;
         this.price = price;
-        this.session = session;
-        this.user = user;
+        this.sessionId = session;
+        this.userId = user;
     }
 
     protected TicketDTO(){}
@@ -31,19 +35,19 @@ public class TicketDTO {
         this.price = price;
     }
 
-    public int getSession() {
-        return session;
+    public int getSessionId() {
+        return sessionId;
     }
 
-    public void setSession(int session) {
-        this.session = session;
+    public void setSessionId(int session) {
+        this.sessionId = session;
     }
 
-    public int getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(int user) {
-        this.user = user;
+    public void setUserId(int user) {
+        this.userId = user;
     }
 }

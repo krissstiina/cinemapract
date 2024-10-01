@@ -3,13 +3,13 @@ package com.cinemaPractic.demo.model;
 public class HallDTO {
     public int id;
     public int capacity;
-    public int cinema;
+    public int cinemaId;
 
     protected HallDTO(){}
 
     public HallDTO(int id, int capacity, int cinema){
         this.capacity = capacity;
-        this.cinema = cinema;
+        this.cinemaId = cinema;
     }
 
     public int getId() {
@@ -21,11 +21,11 @@ public class HallDTO {
     }
 
     public int getCinema() {
-        return cinema;
+        return cinemaId;
     }
 
-    public void setCinema(int cinema) {
-        this.cinema = cinema;
+    public void setCinemaId(int cinema) {
+        this.cinemaId = cinema;
     }
     
     public int getCapacity() {

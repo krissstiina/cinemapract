@@ -5,9 +5,9 @@ import java.util.Date;
 public class SessionDTO {
     public int id;
     public Date date;
-    public int hall;
-    public int film;
-    public int cinema;
+    public int hallId;
+    public int filmId;
+    public int cinemaId;
     public int availableSeats;
 
     protected SessionDTO(){}
@@ -15,18 +15,18 @@ public class SessionDTO {
     public SessionDTO(int id, Date date, int  hall, int film, int cinema, int availableSeats){
         this.id = id;
         this.date = date;
-        this.hall = hall;
-        this.film = film;
-        this.cinema = cinema;
+        this.hallId = hall;
+        this.filmId = film;
+        this.cinemaId = cinema;
         this.availableSeats = availableSeats;
     }
 
-    public int getCinema() {
-        return cinema;
+    public int getCinemaId() {
+        return cinemaId;
     }
 
-    public void setCinema(int cinema) {
-        this.cinema = cinema;
+    public void setCinemaId(int cinema) {
+        this.cinemaId = cinema;
     }
 
     public int getId() {
@@ -45,20 +45,20 @@ public class SessionDTO {
         this.date = date;
     }
     
-    public int getHall() {
-        return hall;
+    public int getHallId() {
+        return hallId;
     }
 
-    public void setHall(int hall) {
-        this.hall = hall;
+    public void setHallId(int hall) {
+        this.hallId = hall;
     }
 
-    public int getFilm() {
-        return film;
+    public int getFilmID() {
+        return filmId;
     }
 
-    public void setFilm(int film) {
-        this.film = film;
+    public void setFilmId(int film) {
+        this.filmId = film;
     }
 
     public int getAvailableSeats() {
